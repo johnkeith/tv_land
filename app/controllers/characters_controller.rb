@@ -19,9 +19,10 @@ class CharactersController < ApplicationController
   end
  
   def destroy
-    binding.pry
     @character = Character.find(params[:id])
     @character.destroy
+
+    flash[:notice]= "The character has been successfully deleted"
     redirect_to '/characters'
 
   end
