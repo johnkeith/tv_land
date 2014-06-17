@@ -11,17 +11,54 @@ feature "user views a TV show's details", %Q{
 
   scenario "user inputs valid information for new character" do
 
-    visit '/television_shows/new'
+   show = TelevisionShow.create(title: 'Game of Thrones',
+      network: 'HBO' )
 
-    fill_in('name', with: 'Joe Bob')
-    fill_in('actor', with: 'Billy Bob')
-    fill_in('description', with: 'A test description')
+    visit "/television_shows/#{show.id}"
 
-    click_on('Save')
+    fill_in('Name', with: 'Joe Bob')
+    fill_in('Actor', with: 'Billy Bob')
+    fill_in('Description', with: 'A test description')
+
+    click_on('Create Character')
 
     expect(page).to have_content "Character successfully added"
-
     expect(page).to have_content "Name: Joe Bob"
 
+  end
+
+  scenario "user does not provide required information " do 
+    show = TelevisionShow.create(title: 'Game of Thrones',
+      network: 'HBO' )
+
+    visit "/television_shows/#{show.id}"
+
+    fill_in('Name', with: 'Joe Bob')
+    fill_in('Description', with: 'A test description')
+
+    click_on('Create Character')
+
+    expect(page).to have_content "There was an error!"
+  end
+
+  scenario "user tries to add a character already in the database" do 
+    show = TelevisionShow.create(title: 'Game of Thrones',
+      network: 'HBO' )
+
+    visit "/television_shows/#{show.id}"
+
+    fill_in('Name', with: 'Joe Bob')
+    fill_in('Actor', with: 'Billy Bob')
+    fill_in('Description', with: 'A test description')
+
+    click_on('Create Character')
+
+    fill_in('Name', with: 'Joe Bob')
+    fill_in('Actor', with: 'Billy Bob')
+    fill_in('Description', with: 'A test description')
+
+    click_on('Create Character')
+
+    expect(page).to have_content "There was an error!"
   end
 end

@@ -5,11 +5,15 @@
   <li>Years: <%= @television_show.years %></li>
 </ul>
 
+<% @television_show.characters.each do |char|%>
+  <p>Name: <%= char.name %></p>
+ <%end%>
+
 <div>
   <%= @television_show.synopsis %>
 </div>
 
-<%= form_for @character do |f| %>
+<%= form_for [@television_show, @character] do |f| %>
   <%= f.label  :name %>
   <%= f.text_field :name%>
 
