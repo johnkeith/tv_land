@@ -2,7 +2,6 @@ class CharactersController < ApplicationController
 
   def index
     @characters = Character.all
-
   end
 
   def create
@@ -17,6 +16,14 @@ class CharactersController < ApplicationController
       flash[:notice] = "There was an error!"
       render :'television_shows/show'
     end
+  end
+ 
+  def destroy
+    binding.pry
+    @character = Character.find(params[:id])
+    @character.destroy
+    redirect_to '/characters'
+
   end
 
   private
