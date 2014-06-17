@@ -3,4 +3,5 @@ TvShows::Application.routes.draw do
   resources :television_shows do
     resources :characters, only: :create
   end
+  resources :characters, only: [:index]
 end

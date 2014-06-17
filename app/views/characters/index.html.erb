@@ -1,0 +1,5 @@
+<h1>Characters List</h1>
+<% @characters.each do |char|%>
+  <p><%= "Character Name: #{char.name} | Actor Name: #{char.actor} | Description: #{char.description} | Show: #{char.television_show.title}" %></p>
+<%end%>
+

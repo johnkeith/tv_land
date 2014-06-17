@@ -8,7 +8,6 @@ feature "user views a TV show's details", %Q{
   * If the character already exists in the database, I receive an error message
 } do
 
-
   scenario "user inputs valid information for new character" do
 
    show = TelevisionShow.create(title: 'Game of Thrones',

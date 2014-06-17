@@ -6,7 +6,7 @@
 </ul>
 
 <% @television_show.characters.each do |char|%>
-  <p>Name: <%= char.name %></p>
+  <p><%= "Character Name: #{char.name} | Actor Name: #{char.actor} | Description: #{char.description}" %></p>
  <%end%>
 
 <div>
